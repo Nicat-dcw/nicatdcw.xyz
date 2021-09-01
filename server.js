@@ -1,34 +1,33 @@
-// server.js
-// where your node app starts
-
-// we've started you off with Express (https://expressjs.com/)
-// but feel free to use whatever libraries or frameworks you'd like through `package.json`.
 const express = require("express");
+
 const app = express();
 
-// our default array of dreams
-const dreams = [
-  "Find and count some sheep",
-  "Climb a really tall mountain",
-  "Wash the dishes"
-];
+app.set('view engine', 'ejs');
+app.use('/assets', express.static('assets'))
+//Sayfa
 
-// make all the files in 'public' available
-// https://expressjs.com/en/starter/static-files.html
-app.use(express.static("public"));
+app.get("/", (req,res) => {
+ var testmesaj = "Learning Front-End"
+  res.render("index",{
+    mesaj: testmesaj
+      
+  });
+  
+  });
 
-// https://expressjs.com/en/starter/basic-routing.html
-app.get("/", (request, response) => {
-  response.sendFile(__dirname + "/views/index.html");
-});
 
-// send the default array of dreams to the webpage
-app.get("/dreams", (request, response) => {
-  // express helps us take JS objects and send them as JSON
-  response.json(dreams);
-});
 
-// listen for requests :)
+app.get("/github", (req,res) => {
+  res.redirect("https://github.com/Nicat-dcw");
+  });
+
+
+
+
+
+
+
+
 const listener = app.listen(process.env.PORT, () => {
-  console.log("Your app is listening on port " + listener.address().port);
+  console.log("Sunucu Portu :  " + listener.address().port);
 });
